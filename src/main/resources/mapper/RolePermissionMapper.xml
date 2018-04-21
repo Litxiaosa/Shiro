@@ -67,6 +67,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
+  
   <!--批量插入角色权限表-->
   <insert id="insertRolePermission">
     insert into role_permission (role_id, permission_id)
