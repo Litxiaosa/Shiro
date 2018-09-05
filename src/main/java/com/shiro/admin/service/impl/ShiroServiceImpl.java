@@ -20,7 +20,7 @@ import java.util.List;
  */
 
 @Service
-@Transactional(rollbackFor = Exception.class, isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED )
+@Transactional(rollbackFor = Exception.class, isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 public class ShiroServiceImpl implements IShiroService {
 
     @Autowired
@@ -96,20 +96,20 @@ public class ShiroServiceImpl implements IShiroService {
 
 
     /**
+     * @param userId
      * @description: 试某个用户他所具有的角色和权限
      * @author 潇洒
      * @date 2018/4/20 上午11:02
-     * @param userId
      */
     @Override
     public User getUser(int userId) {
         User user = userMapper.selectByPrimaryKey(userId);
         //查询Role
         List<Role> roleList = roleMapper.listRoleByUserId(user.getId());
-        if(roleList.size()>0){
-            for (Role role : roleList){
+        if (roleList.size() > 0) {
+            for (Role role : roleList) {
                 List<Permission> permissionList = permissionMapper.listPermissionByRoleId(role.getId());
-                if(permissionList.size()>0){
+                if (permissionList.size() > 0) {
                     role.setPermissionList(permissionList);
                 }
             }

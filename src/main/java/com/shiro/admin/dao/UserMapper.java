@@ -19,7 +19,7 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     /**
-     * @description:  查询用户
+     * @description: 查询用户
      * @author 潇洒
      * @date 2018/4/19 下午6:15
      */

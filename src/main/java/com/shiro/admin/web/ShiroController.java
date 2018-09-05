@@ -40,7 +40,7 @@ public class ShiroController {
     @PostMapping(value = "/addRole")
     @ApiOperation(value = "为指定用户分配角色")
     public void addRole(@RequestParam(value = "userId") int userId,
-                        @RequestParam(value = "roleIdList") List<Integer> roleIdList){
+                        @RequestParam(value = "roleIdList") List<Integer> roleIdList) {
         shiroService.addRole(userId, roleIdList);
     }
 
@@ -53,7 +53,7 @@ public class ShiroController {
     @PostMapping(value = "/addPermission")
     @ApiOperation(value = "为指定角色分配权限")
     public void addPermission(@RequestParam(value = "roleId") int roleId,
-                              @RequestParam(value = "permissionIdList") List<Integer> permissionIdList){
+                              @RequestParam(value = "permissionIdList") List<Integer> permissionIdList) {
         shiroService.addPermission(roleId, permissionIdList);
     }
 
@@ -69,7 +69,7 @@ public class ShiroController {
     @ApiOperation(value = "测试某个用户他所具有的角色和权限")
     @RequiresAuthentication
     @RequiresRoles("角色1")
-    public User user(@RequestParam(value = "userId") int userId){
+    public User user(@RequestParam(value = "userId") int userId) {
         return shiroService.getUser(userId);
     }
 
@@ -82,7 +82,7 @@ public class ShiroController {
     @PostMapping(value = "/login")
     @ApiOperation(value = "登录")
     public String login(@RequestParam(value = "userName") String userName,
-                        @RequestParam(value = "password") String password){
+                        @RequestParam(value = "password") String password) {
         //省略了用户名、密码不正确等等的校验
         //构造一个用户密码令牌
         UsernamePasswordToken token = new UsernamePasswordToken(userName, password);

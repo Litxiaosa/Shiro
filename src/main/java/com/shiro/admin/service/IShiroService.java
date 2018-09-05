@@ -54,10 +54,10 @@ public interface IShiroService {
 
 
     /**
+     * @param userId
      * @description: 测试某个用户他所具有的角色和权限
      * @author 潇洒
      * @date 2018/4/20 上午10:58
-     * @param userId
      */
     User getUser(int userId);
 }

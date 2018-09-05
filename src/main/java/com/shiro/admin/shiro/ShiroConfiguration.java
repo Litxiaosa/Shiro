@@ -21,7 +21,7 @@ import java.util.Map;
 public class ShiroConfiguration {
 
     /**
-     * @description:  将自己的验证方式加入容器
+     * @description: 将自己的验证方式加入容器
      * @author 潇洒
      * @date 2018/4/19 下午6:36
      */
@@ -53,7 +53,7 @@ public class ShiroConfiguration {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-        Map<String,String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>();
         //对所有用户认证
         //map.put("/**","authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);

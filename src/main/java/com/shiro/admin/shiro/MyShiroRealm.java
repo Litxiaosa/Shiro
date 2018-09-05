@@ -27,31 +27,31 @@ public class MyShiroRealm extends AuthorizingRealm {
     private IShiroService shiroService;
 
     /**
-     * @description:  角色权限和对应权限添加
+     * @description: 角色权限和对应权限添加
      * @author 潇洒
      * @date 2018/4/19 下午6:05
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取登录用户名
-        String userName= (String) principalCollection.getPrimaryPrincipal();
+        String userName = (String) principalCollection.getPrimaryPrincipal();
         //查询用户
         User user = shiroService.getUserByName(userName);
-        if(user == null){
+        if (user == null) {
             return null;
         }
         //根据用户查询他拥有什么角色
         List<Role> listRole = shiroService.listRoleByUserId(user.getId());
         //添加角色和权限
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        if(listRole.size()>0){
-            for (Role role: listRole) {
+        if (listRole.size() > 0) {
+            for (Role role : listRole) {
                 //添加角色
                 simpleAuthorizationInfo.addRole(role.getRoleName());
                 //查询该角色拥有那些权限
                 List<Permission> listPermission = shiroService.listPermissionByRoleId(role.getId());
-                if(listPermission.size()>0){
-                    for (Permission permission:listPermission) {
+                if (listPermission.size() > 0) {
+                    for (Permission permission : listPermission) {
                         //添加权限
                         simpleAuthorizationInfo.addStringPermission(permission.getPermissionName());
                     }
@@ -63,7 +63,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 
 
     /**
-     * @description:  用户认证
+     * @description: 用户认证
      * @author 潇洒
      * @date 2018/4/19 下午6:32
      */
@@ -76,12 +76,12 @@ public class MyShiroRealm extends AuthorizingRealm {
         //获取用户信息
         String userName = token.getPrincipal().toString();
         User user = shiroService.getUserByName(userName);
-        if(user == null){
+        if (user == null) {
             return null;
         }
         //这里验证authenticationToken和simpleAuthenticationInfo的信息
         SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user.getUserName(),
-                user.getPassword(),getName());
+                user.getPassword(), getName());
         return simpleAuthenticationInfo;
     }
 }

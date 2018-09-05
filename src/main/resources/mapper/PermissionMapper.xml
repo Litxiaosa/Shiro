@@ -1,70 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.shiro.admin.dao.PermissionMapper" >
-  <resultMap id="BaseResultMap" type="com.shiro.admin.domain.Permission" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, permission_name
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from permission
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from permission
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.shiro.admin.domain.Permission" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into permission (permission_name)
-    values (#{permissionName,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.shiro.admin.domain.Permission" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into permission
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="permissionName != null" >
-        permission_name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="permissionName != null" >
-        #{permissionName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shiro.admin.domain.Permission" >
-    update permission
-    <set >
-      <if test="permissionName != null" >
-        permission_name = #{permissionName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.shiro.admin.domain.Permission" >
-    update permission
-    set permission_name = #{permissionName,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.shiro.admin.dao.PermissionMapper">
+    <resultMap id="BaseResultMap" type="com.shiro.admin.domain.Permission">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="permission_name" property="permissionName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, permission_name
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from permission
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from permission
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.shiro.admin.domain.Permission">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into permission (permission_name)
+        values (#{permissionName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.shiro.admin.domain.Permission">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionName != null">
+                permission_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="permissionName != null">
+                #{permissionName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.shiro.admin.domain.Permission">
+        update permission
+        <set>
+            <if test="permissionName != null">
+                permission_name = #{permissionName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.shiro.admin.domain.Permission">
+        update permission
+        set permission_name = #{permissionName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
-  <!--根据roleId 查询权限-->
-  <select id="listPermissionByRoleId" resultMap="BaseResultMap">
-   SELECT
-      p.id,
-	  p.permission_name
-   FROM
-      permission p
-      LEFT JOIN role_permission r ON r.permission_id = p.id
-   WHERE
-      r.role_id= #{roleId}
-  </select>
+    <!--根据roleId 查询权限-->
+    <select id="listPermissionByRoleId" resultMap="BaseResultMap">
+        SELECT
+        p.id,
+        p.permission_name
+        FROM
+        permission p
+        LEFT JOIN role_permission r ON r.permission_id = p.id
+        WHERE
+        r.role_id= #{roleId}
+    </select>
 </mapper>
